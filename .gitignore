@@ -1,0 +1,48 @@
+
+bookmarker-api/mvnw
+bookmarker-api/.mvn/wrapper/maven-wrapper.jar
+bookmarker-api/.mvn/wrapper/maven-wrapper.properties
+*.jar
+bookmarker-api/mvnw.cmd
+
+
+@@ -0,0 +1,39 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+bookmarker-api/mvnw
+bookmarker-api/.mvn/wrapper/maven-wrapper.jar
+bookmarker-api/.mvn/wrapper/maven-wrapper.properties
+*.jar
+bookmarker-api/mvnw.cmd
