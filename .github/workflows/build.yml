@@ -22,11 +22,13 @@ jobs:
           cache: 'maven'
 
       - name: Build with Maven
-        run: mvn verify
+        run: |
+          chmod +x mvnw
+          ./mvnw verify
 
       - if: ${{ github.ref == 'refs/heads/main' }}
         name: Build and Publish Docker Image
         run: |
-          mvn clean package jib:build -DskipTests
+          ./mvnw clean package jib:dockerBuild -DskipTests
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           docker push ${{ secrets.DOCKER_USERNAME }}/bookmarker-api
