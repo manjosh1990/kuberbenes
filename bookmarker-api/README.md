@@ -1,2 +1,0 @@
-# kuberbenes
-praticing kubernetes
