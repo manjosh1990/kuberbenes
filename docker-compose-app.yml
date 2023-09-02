@@ -15,3 +15,15 @@ services:
     restart: always
     depends_on:
       - bookmarker-db
+  bookmark-gui:
+    build:
+      context: bookmark-gui
+      dockerfile: Dockerfile-gui.layered
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      BOOKMARK_API_URI: http://bookmarker-api:8080
+    ports:
+      - "10443:10443"
+    restart: always
+    depends_on:
+      - bookmarker-api

@@ -46,3 +46,6 @@ bookmarker-api/.mvn/wrapper/maven-wrapper.jar
 bookmarker-api/.mvn/wrapper/maven-wrapper.properties
 *.jar
 bookmarker-api/mvnw.cmd
+bookmark-gui/src/main/gui/build/*
+bookmark-gui/src/main/gui/node_modules/*
+bookmark-gui/src/main/resources/static/*

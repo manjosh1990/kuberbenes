@@ -1,0 +1,12 @@
+server:
+  port: 10443
+spring:
+  application:
+    name: bookmark-api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: bookmark-api
+          uri: ${BOOKMARK_API_URI}
+          predicates:
+            - Path=/api/bookmarks/**

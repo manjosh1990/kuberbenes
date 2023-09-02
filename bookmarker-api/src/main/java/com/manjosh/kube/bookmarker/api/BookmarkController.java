@@ -13,6 +13,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api/bookmarks")
 @RequiredArgsConstructor
+@CrossOrigin
 public class BookmarkController {
 
     private final BookmarkService bookmarkService;
