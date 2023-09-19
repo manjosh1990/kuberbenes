@@ -1,0 +1,97 @@
+docker-compose up -d
+docker-compose -f docker-compose.yml -f docker-compose-app.yml up -d
+docker-compose -f docker-compose.yml -f docker-compose-app.yml up logs -f
+docker-compose -f docker-compose.yml -f docker-compose-app.yml stop
+
+
+mvn clean package jib:dockerBuild -DskipTests
+#push to docker hub
+docker push manjosh1990/bookmarker-gui
+********************************** KUBECTL COMMANDS ****************************************************
+bookmarker-api-jib
+
+
+start bookmarker-api
+kubectl run bookmarker-api --image=manjosh1990/bookmarker-api-jib --port=8080
+
+kubectl exec -it bookmarker-api -- bash
+kubectl logs bookmarker-api -f  // display logs
+kubectl describe pods bookmarker-api // details about pod
+
+//delete pods
+kubectl delete pods bookmarker-api
+//get all pods(including services,replica sets, deployments etc)
+kubectl get all
+
+
+
+
+create manifest files
+kubectl run bookmarker-api --image=manjosh1990/bookmarker-api-jib --port=8080 --dry-run=client -o yaml > pod.yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: bookmarker-api
+  name: bookmarker-api
+spec:
+  containers:
+  - image: manjosh1990/bookmarker-api-jib
+    name: bookmarker-api
+    ports:
+    - containerPort: 8080
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+
+to run the above manifest file
+
+kubectl apply -f pod.yaml
+
+to delete
+kubectl delete -f pod.yaml
+
+to create deployment
+
+kubectl create deployment bookmarker-api --image=manjosh1990/bookmarker-api-jib
+
+kubectl get all
+
+kubectl delete deployment.apps/bookmarker-api
+
+************************************ DEPLOYMENTS ****************************************************
+create manifest for deployment
+
+kubectl create deployment bookmarker-api --image=manjosh1990/bookmarker-api-jib --dry-run=client -o yaml > deployment.yaml
+
+
+kubectl apply -f deployment.yaml
+
+kubectl delete -f deployment.yaml
+
+
+kubectl scale deployment bookmarker-api --replicas=3
+kubectl rollout history deployments bookmarker-api
+
+
+*********************************** CONFIG MAPS ************************************************
+
+create config map
+
+kubectl create configmap db-config --from-literal=db_host=postgres --from-literal=db_name=appdb
+
+kubectl get cm
+kubectl delete cm db-config
+
+kubectl create configmap db-config --from-literal=db_host=postgres --from-literal=db_name=appdb --dry-run=client -o yaml > 1-config.yaml
+
+kubectl apply -f 1-config.yaml
+kubectl apply -f .
+************************************ SECRETS ****************************************************
+kubectl create secret generic bookmarker-secrets --from-literal=postgres_username=postgres --dry-run=client -o yaml
+
+
+*********************************** SERVICES *****************************************

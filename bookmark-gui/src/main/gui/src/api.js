@@ -1,9 +1,9 @@
 const apiUrl = "localhost";
-const apiPort = "10443";
+const apiPort = "80";
 const joinUrl = (baseUrl, url) => {
   return `${baseUrl}/${url}`;
 };
-const domain = `http://${apiUrl}:${apiPort}/api/bookmarks`;
+const domain = `http://${apiUrl}:${apiPort}/bookmarker-api/api/bookmarks`;
 
 export async function getBookmarks(url = "") {
   url = joinUrl(domain, url);
